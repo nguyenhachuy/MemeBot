@@ -35,8 +35,10 @@ client.on("message", (message) => {
   	}).catch(err => console.log(err));
   }
   if(message.content === "Leave Channel") {
-  	channel = channel.disconnect();
+  	if(channel)
+  		channel = channel.disconnect();
   }
+
 });
 
 
@@ -82,16 +84,19 @@ function playSound(key) {
 	// 	client.voiceConnections.first().playFile(config.dir + config.sad_bone);
 	// }
 	//console.log(client.voiceConnections);
-	if(key == "W"){
-		channel.playFile(config.dir + config.sad_bone);
-	}
-	if(key == "Q"){
-		channel.playFile(config.dir + config.cricket);
-	}
-	if(key == "R"){
+	if(channel) { 
+		if(key == "W"){
+			channel.playFile(config.dir + config.sad_bone);
+		}
+		if(key == "Q"){
+			channel.playFile(config.dir + config.cricket);
+		}
+		if(key == "R"){
 		//client.voiceConnections.first().playFile(config.dir + config.charge);
-		channel.playFile(config.dir + config.charge);
+			channel.playFile(config.dir + config.charge);
+		}
 	}
+	
 
 	
 }
