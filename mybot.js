@@ -11,9 +11,11 @@ const event = "key.pressed";
 var mod;
 
 var map = new Map();
-map.set("Q", false);
-map.set("W", false);
-map.set("R", false);
+map.set("Minus", false);
+map.set("Equal", false);
+map.set("Back Slash", false);
+
+
 map.set(ctr, false);
 
 
@@ -46,18 +48,26 @@ client.on("message", (message) => {
 gkm.events.on("key.pressed", function(data) {
 	data = data.toString();
 	//console.log(JSON.stringify(this, null, 4));
-
+	//console.log(data);
 	if(map.get(ctr)) {
 		//console.log("hotkey");
 		if(isHotKey(data) && !isMod(data)) {// && data == "W") {
-			playSound(data);
+			playSound(ctr, data);
 			//map.set(ctr, false);
 		}	
 	}
+
 	else if(isMod(data)) {
+		//console.log("hotkey1");
+
 		map.set(ctr, true);	
 	}
 
+	else if(isHotKey(data)) {
+		//console.log("hotkey2");
+
+		playSound("", data)
+	}
 
     else if(data == "P" ){
     	process.exit(1);
@@ -76,7 +86,7 @@ gkm.events.on("key.released", function(data) {
 // gkm.events.on('mouse.*', function(data) {
 // 	console.log(this.event + ' ' + data);
 // });
-function playSound(key) {
+function playSound(mod, key) {
 	// if(mod == ctr && key == "W") {
 	//console.log("Bingo!");
 	// 	console.log(client.voiceConnections.size);
@@ -84,20 +94,36 @@ function playSound(key) {
 	// 	client.voiceConnections.first().playFile(config.dir + config.sad_bone);
 	// }
 	//console.log(client.voiceConnections);
+	//console.log("bingo!");
 	if(channel) { 
-		if(key == "W"){
-			channel.playFile(config.dir + config.sad_bone);
+
+		if(mod) {
+			console.log("mod");
+			if(key == "Minus"){
+				console.log("minus");
+				channel.playFile(config.dir + config.aegis);
+			}
+			if(key == "Equal"){
+				channel.playFile(config.dir + config.arteezy_donation);
+			}
+			if(key == "Back Slash"){
+			//client.voiceConnections.first().playFile(config.dir + config.charge);
+				channel.playFile(config.dir + config.drop_your_stick);
+			}
 		}
-		if(key == "Q"){
-			channel.playFile(config.dir + config.cricket);
-		}
-		if(key == "R"){
-		//client.voiceConnections.first().playFile(config.dir + config.charge);
-			channel.playFile(config.dir + config.charge);
+
+		else {
+			if(key == "Minus") {
+				channel.playFile(config.dir + config.furion_tp_top);
+			}
+			if(key == "Equal") {
+				channel.playFile(config.dir + config.gebak);
+			}
+			if(key == "Back Slash") {
+				channel.playFile(config.dir + config.we_lost);
+			}
 		}
 	}
-	
-
 	
 }
 function isMod(key) {

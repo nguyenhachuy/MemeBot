@@ -7,5 +7,11 @@
 	"drum_roll": "drum_roll.wav",
 	"frog": "frog.wav",
 	"headshake": "headshake.wav",
-	"sad_bone": "sad_bone.wav"
+	"sad_bone": "sad_bone.wav",
+	"aegis": "aegisnoroom.mp3",
+	"arteezy_donation": "Arteezy donation sound.mp3",
+	"drop_your_stick": "dropyourstick.mp3",
+	"furion_tp_top": "furiontptop.mp3",
+	"gebak": "Gebak.mp3",
+	"we_lost": "welost.mp3"
 }
