@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 //var isReady = true;
 var channel = "";
+var dispatcher = "";
 client.login("MzMwOTY3MzMzNjkyNjM3MTg0.DHQINQ.EDoqIAiHuapDwV2EEuWDsPsUmkc");
 const ctr = "Left Control";
 const alt = "Left Alt";
@@ -12,7 +13,7 @@ var mod;
 
 var map = new Map();
 map.set("Minus", false);
-map.set("Equal", false);
+map.set("Equals", false);
 map.set("Back Slash", false);
 
 
@@ -33,6 +34,7 @@ client.on("message", (message) => {
   	var voiceChannel = message.member.voiceChannel;
   	voiceChannel.join().then(connection => {
   		channel = connection;
+  		console.log("Channel joined!");
   		//connection.playFile("E:/PersonalProjects/memebot/sound/match.mp3");
   	}).catch(err => console.log(err));
   }
@@ -72,6 +74,12 @@ gkm.events.on("key.pressed", function(data) {
     else if(data == "P" ){
     	process.exit(1);
     }
+    else if(data === "Close Bracket"){
+    	if(dispatcher){ 
+    		console.log("dispatched");
+    		dispatcher.end();
+    	}
+    }
  	//playSound(data, data);
 });
 
@@ -97,37 +105,35 @@ function playSound(mod, key) {
 	//console.log("bingo!");
 	if(channel) { 
 
-		if(mod) {
-			console.log("mod");
+		if(mod == ctr) {
 			if(key == "Minus"){
-				console.log("minus");
-				channel.playFile(config.dir + config.aegis);
+				dispatcher = channel.playFile(config.dir + config.aegis);
 			}
-			if(key == "Equal"){
-				channel.playFile(config.dir + config.arteezy_donation);
+			if(key == "Equals"){
+				dispatcher = channel.playFile(config.dir + config.arteezy_donation);
 			}
 			if(key == "Back Slash"){
 			//client.voiceConnections.first().playFile(config.dir + config.charge);
-				channel.playFile(config.dir + config.drop_your_stick);
+				dispatcher = channel.playFile(config.dir + config.drop_your_stick);
 			}
 		}
 
 		else {
 			if(key == "Minus") {
-				channel.playFile(config.dir + config.furion_tp_top);
+				dispatcher = channel.playFile(config.dir + config.furion_tp_top);
 			}
-			if(key == "Equal") {
-				channel.playFile(config.dir + config.gebak);
+			if(key == "Equals") {
+				dispatcher = channel.playFile(config.dir + config.gebak);
 			}
 			if(key == "Back Slash") {
-				channel.playFile(config.dir + config.we_lost);
+				dispatcher = channel.playFile(config.dir + config.we_lost);
 			}
 		}
 	}
 	
 }
 function isMod(key) {
-	if(key == ctr || key == alt)
+	if(key == ctr)
 		return true;
 	else
 		return false;
